@@ -12,7 +12,7 @@ After installing Go, you can clone this repo and then run this command.
 go install github.com/raicem/podcast-archive
 ```
 
-This will `podcast-archive` executable to in your PATH.
+This will put `podcast-archive` executable to in your PATH.
 
 ## Usage
 
