@@ -18,7 +18,7 @@ func main() {
 	input := os.Args[1:]
 
 	if len(input) == 0 {
-		fmt.Println("Podcast Archiver.")
+		fmt.Println("Usage: podcast-archiver FEED")
 		os.Exit(0)
 	}
 
