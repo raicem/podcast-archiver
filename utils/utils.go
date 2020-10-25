@@ -4,6 +4,7 @@ import (
 	"net/url"
 	"path"
 	"strconv"
+	"strings"
 
 	"github.com/mmcdole/gofeed"
 )
@@ -43,7 +44,8 @@ func GetFileName(podcast Podcast) (string, error) {
 	}
 
 	filename := path.Base(parsedURL.Path)
-	filename = podcast.Title + "-" + filename
+	title := strings.Replace(podcast.Title, "/", "", -1)
+	filename = title + "-" + filename
 
 	return filename, nil
 }
