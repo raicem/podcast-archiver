@@ -17,7 +17,11 @@ This will put `podcast-archive` executable to in your PATH.
 ## Usage
 
 ```bash
-podcast-archiver FEED_URL
+podcast-archiver [OPTIONS...] FEED_URL
+
+OPTIONS
+    -limit <number> Number of episodes to download. Default is unlimited.
+    -order <direction> Order to start downloading episodes. Possible values are "newest" and "oldest". Default is newest."
 ```
 
 This will start downloading all episodes in the feed. Files will saved to the current folder.

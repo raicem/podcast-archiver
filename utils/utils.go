@@ -49,3 +49,16 @@ func GetFileName(podcast Podcast) (string, error) {
 
 	return filename, nil
 }
+
+// ReversePodcastsToDownload Reverses the slice of podcast episodes.
+func ReversePodcastsToDownload(podcastsToDownload []Podcast) []Podcast {
+	var reversed []Podcast
+
+	numberOfPodcastsToDownload := len(podcastsToDownload)
+
+	for i := 0; i < numberOfPodcastsToDownload; i++ {
+		reversed = append(reversed, podcastsToDownload[(numberOfPodcastsToDownload-1)-i])
+	}
+
+	return reversed
+}

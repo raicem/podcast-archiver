@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
@@ -15,10 +16,18 @@ import (
 )
 
 func main() {
-	input := os.Args[1:]
+	limit := flag.Int("limit", 0, "Number of episodes to download.")
+	order := flag.String("order", "newest", "Order of which episodes to download first. Feed items may not be chronological.")
+
+	flag.Parse()
+
+	input := flag.Args()
 
 	if len(input) == 0 {
-		fmt.Println("Usage: podcast-archiver FEED")
+		fmt.Println("Usage: podcast-archiver [OPTIONS...] FEED_URL")
+		fmt.Println("\nOPTIONS")
+		fmt.Println("\t-limit <number> Number of episodes to download. Default is unlimited.")
+		fmt.Println("\t-order <direction> Order to start downloading episodes. Possible values are \"newest\" and \"oldest\". Default is newest.")
 		os.Exit(0)
 	}
 
@@ -52,6 +61,16 @@ func main() {
 		if len(item.Enclosures) > 0 {
 			podcastsToDownload = append(podcastsToDownload, utils.ParseItem(item))
 		}
+	}
+
+	// User wants to download the oldest episodes first. We can reverse the items in the feed.
+	if *order == "oldest" {
+		podcastsToDownload = utils.ReversePodcastsToDownload(podcastsToDownload)
+	}
+
+	// User wants to only download certain number of episodes.
+	if *limit > 0 {
+		podcastsToDownload = podcastsToDownload[0:*limit]
 	}
 
 	fmt.Printf("%d episodes from %s will be downloaded\n", len(podcastsToDownload), feed.Title)
