@@ -9,7 +9,7 @@ You should have Go installed on your device. To install Go, please refer to [thi
 After installing Go, you can clone this repo and then run this command.
 
 ```bash
-go install github.com/raicem/podcast-archive
+go install
 ```
 
 This will put `podcast-archive` executable to in your PATH.
